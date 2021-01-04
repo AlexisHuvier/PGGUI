@@ -10,9 +10,11 @@ setup(
     long_description_content_type="text/markdown",
     long_description=open("README.md").read(),
     include_package_data=True,
+    url='https://github.com/AlexisHuvier/PGGUI',
     classifiers=[
         "Programming Language :: Python",
-        "Development Status :: 1 - Planning"
+        "Development Status :: 1 - Planning",
+        'Intended Audience :: Developers'
     ],
     install_requires=["pygame"]
 )
