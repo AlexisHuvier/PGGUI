@@ -2,3 +2,5 @@
 *.gz
 *.pyc
 *.egg-info
+/dist/*
+/build/*
