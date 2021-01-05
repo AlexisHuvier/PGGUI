@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>pggui.widgets.checkbox API documentation</title>
+<title>pggui.widgets.progress_bar API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>pggui.widgets.checkbox</code></h1>
+<h1 class="title">Module <code>pggui.widgets.progress_bar</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -27,76 +27,59 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">from pggui.widgets.widget import Widget
-from pggui.utils import Font
+from pggui.utils import Vec2, Color
 
 import pygame
 
 
-class Checkbox(Widget):
-    def __init__(self, position, text=&#34;&#34;, font=Font(), checked=False, scale=1):
+class ProgressBar(Widget):
+    def __init__(self, position, size=Vec2(150, 10), color=Color.from_name(&#34;GREEN&#34;), value=0):
         &#34;&#34;&#34;
-            Create Checkbox Widget
+            Create ProgressBar Widget
 
             Parameters
             ----------
             position: Vec2
-                Position of Checkbox
-            text: str
-                Text of Checkbox
-            font: Font
-                Font of Checkbox
-            checked: bool
-                True if Checkbox is checked or False
-            scale: int or float
-                Scale of Checkbox
+                Position of ProgressBar
+            size: Vec2
+                Size of ProgressBar
+            color: Color
+                Color of ProgressBar
+            value: int
+                Current value of ProgressBar. Between 1 and 100.
         &#34;&#34;&#34;
         super().__init__(position)
-        self.text = text
-        self.font = font
-        self.checked = checked
-        self.scale = scale
-
+        self.size = size
+        self.color = color
+        self.value = value
         self.render = None
-        self.render_btn = None
         self.update_render()
-
+    
     def update_render(self):
         &#34;&#34;&#34;
-            Update Render of Checkbox
+            Update Render of ProgressBar
 
-            .. warning:: You must use this method after any change in Checkbox
+            .. warning:: You must use this method after any change in ProgressBar
         &#34;&#34;&#34;
-        self.render_btn = pygame.Surface((20*self.scale, 20*self.scale))
-        self.render_btn.fill((50, 50, 50))
-        self.render_btn.fill((255, 255, 255), pygame.Rect(2*self.scale, 2*self.scale, 16*self.scale, 16*self.scale))
-        if self.checked:
-            self.render_btn.fill((0, 0, 0), pygame.Rect(3*self.scale, 3*self.scale, 14*self.scale, 14*self.scale))
-
-        render_label = self.font.render(self.text)
-        self.render = pygame.Surface((20*self.scale + 5 + render_label.get_width(), 20*self.scale), pygame.SRCALPHA, 32).convert_alpha()
-        self.render.blit(self.render_btn, (0, 0))
-        self.render.blit(render_label, (20*self.scale + 5, 10*self.scale - render_label.get_height() / 2))
-        
+        self.render = pygame.Surface(self.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
+        self.render.fill((50, 50, 50))
+        white = pygame.Surface((self.size - 2).coords(), pygame.SRCALPHA, 32).convert_alpha()
+        white.fill((255, 255, 255))
+        self.render.blit(white, (1, 1))
+        bar = pygame.Surface((int((self.size.x - 4) * (self.value / 100)), self.size.y - 4), pygame.SRCALPHA, 32).convert_alpha()
+        bar.fill(self.color.get_rgba())
+        self.render.blit(bar, (2, 2))
+    
     def display(self, screen):
         &#34;&#34;&#34;
-            Display Checkbox Widget
+            Display ProgressBar Widget
 
             .. warning:: Don&#39;t use this function manually.
         &#34;&#34;&#34;
         if self.displayed:
             screen.blit(self.render, self.position.coords())
-
-    def event(self, evt):
-        &#34;&#34;&#34;
-            Manage Pygame Event
-
-            .. warning:: Don&#39;t use this function manually.
-        &#34;&#34;&#34;
-        if self.displayed:
-            if evt.type == pygame.MOUSEBUTTONDOWN and evt.button == pygame.BUTTON_LEFT:
-                if self.render_btn.get_rect(x=self.get_absolute_position().x, y=self.get_absolute_position().y).collidepoint(*evt.pos):
-                    self.checked = not self.checked
-                    self.update_render()</code></pre>
+    
+    </code></pre>
 </details>
 </section>
 <section>
@@ -108,94 +91,73 @@ class Checkbox(Widget):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="pggui.widgets.checkbox.Checkbox"><code class="flex name class">
-<span>class <span class="ident">Checkbox</span></span>
-<span>(</span><span>position, text='', font=&lt;pggui.utils.font.Font object&gt;, checked=False, scale=1)</span>
+<dt id="pggui.widgets.progress_bar.ProgressBar"><code class="flex name class">
+<span>class <span class="ident">ProgressBar</span></span>
+<span>(</span><span>position, size=Vec2(150, 10), color=(0, 255, 0, 255), value=0)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Create Checkbox Widget</p>
+<div class="desc"><p>Create ProgressBar Widget</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>position</code></strong> :&ensp;<code>Vec2</code></dt>
-<dd>Position of Checkbox</dd>
-<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
-<dd>Text of Checkbox</dd>
-<dt><strong><code>font</code></strong> :&ensp;<code>Font</code></dt>
-<dd>Font of Checkbox</dd>
-<dt><strong><code>checked</code></strong> :&ensp;<code>bool</code></dt>
-<dd>True if Checkbox is checked or False</dd>
-<dt><strong><code>scale</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
-<dd>Scale of Checkbox</dd>
+<dd>Position of ProgressBar</dd>
+<dt><strong><code>size</code></strong> :&ensp;<code>Vec2</code></dt>
+<dd>Size of ProgressBar</dd>
+<dt><strong><code>color</code></strong> :&ensp;<code>Color</code></dt>
+<dd>Color of ProgressBar</dd>
+<dt><strong><code>value</code></strong> :&ensp;<code>int</code></dt>
+<dd>Current value of ProgressBar. Between 1 and 100.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Checkbox(Widget):
-    def __init__(self, position, text=&#34;&#34;, font=Font(), checked=False, scale=1):
+<pre><code class="python">class ProgressBar(Widget):
+    def __init__(self, position, size=Vec2(150, 10), color=Color.from_name(&#34;GREEN&#34;), value=0):
         &#34;&#34;&#34;
-            Create Checkbox Widget
+            Create ProgressBar Widget
 
             Parameters
             ----------
             position: Vec2
-                Position of Checkbox
-            text: str
-                Text of Checkbox
-            font: Font
-                Font of Checkbox
-            checked: bool
-                True if Checkbox is checked or False
-            scale: int or float
-                Scale of Checkbox
+                Position of ProgressBar
+            size: Vec2
+                Size of ProgressBar
+            color: Color
+                Color of ProgressBar
+            value: int
+                Current value of ProgressBar. Between 1 and 100.
         &#34;&#34;&#34;
         super().__init__(position)
-        self.text = text
-        self.font = font
-        self.checked = checked
-        self.scale = scale
-
+        self.size = size
+        self.color = color
+        self.value = value
         self.render = None
-        self.render_btn = None
         self.update_render()
-
+    
     def update_render(self):
         &#34;&#34;&#34;
-            Update Render of Checkbox
+            Update Render of ProgressBar
 
-            .. warning:: You must use this method after any change in Checkbox
+            .. warning:: You must use this method after any change in ProgressBar
         &#34;&#34;&#34;
-        self.render_btn = pygame.Surface((20*self.scale, 20*self.scale))
-        self.render_btn.fill((50, 50, 50))
-        self.render_btn.fill((255, 255, 255), pygame.Rect(2*self.scale, 2*self.scale, 16*self.scale, 16*self.scale))
-        if self.checked:
-            self.render_btn.fill((0, 0, 0), pygame.Rect(3*self.scale, 3*self.scale, 14*self.scale, 14*self.scale))
-
-        render_label = self.font.render(self.text)
-        self.render = pygame.Surface((20*self.scale + 5 + render_label.get_width(), 20*self.scale), pygame.SRCALPHA, 32).convert_alpha()
-        self.render.blit(self.render_btn, (0, 0))
-        self.render.blit(render_label, (20*self.scale + 5, 10*self.scale - render_label.get_height() / 2))
-        
+        self.render = pygame.Surface(self.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
+        self.render.fill((50, 50, 50))
+        white = pygame.Surface((self.size - 2).coords(), pygame.SRCALPHA, 32).convert_alpha()
+        white.fill((255, 255, 255))
+        self.render.blit(white, (1, 1))
+        bar = pygame.Surface((int((self.size.x - 4) * (self.value / 100)), self.size.y - 4), pygame.SRCALPHA, 32).convert_alpha()
+        bar.fill(self.color.get_rgba())
+        self.render.blit(bar, (2, 2))
+    
     def display(self, screen):
         &#34;&#34;&#34;
-            Display Checkbox Widget
+            Display ProgressBar Widget
 
             .. warning:: Don&#39;t use this function manually.
         &#34;&#34;&#34;
         if self.displayed:
-            screen.blit(self.render, self.position.coords())
-
-    def event(self, evt):
-        &#34;&#34;&#34;
-            Manage Pygame Event
-
-            .. warning:: Don&#39;t use this function manually.
-        &#34;&#34;&#34;
-        if self.displayed:
-            if evt.type == pygame.MOUSEBUTTONDOWN and evt.button == pygame.BUTTON_LEFT:
-                if self.render_btn.get_rect(x=self.get_absolute_position().x, y=self.get_absolute_position().y).collidepoint(*evt.pos):
-                    self.checked = not self.checked
-                    self.update_render()</code></pre>
+            screen.blit(self.render, self.position.coords())</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -203,11 +165,11 @@ class Checkbox(Widget):
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="pggui.widgets.checkbox.Checkbox.display"><code class="name flex">
+<dt id="pggui.widgets.progress_bar.ProgressBar.display"><code class="name flex">
 <span>def <span class="ident">display</span></span>(<span>self, screen)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Display Checkbox Widget</p>
+<div class="desc"><p>Display ProgressBar Widget</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning:&ensp;Don't use this function manually.</p>
 </div></div>
@@ -217,7 +179,7 @@ class Checkbox(Widget):
 </summary>
 <pre><code class="python">def display(self, screen):
     &#34;&#34;&#34;
-        Display Checkbox Widget
+        Display ProgressBar Widget
 
         .. warning:: Don&#39;t use this function manually.
     &#34;&#34;&#34;
@@ -225,13 +187,13 @@ class Checkbox(Widget):
         screen.blit(self.render, self.position.coords())</code></pre>
 </details>
 </dd>
-<dt id="pggui.widgets.checkbox.Checkbox.update_render"><code class="name flex">
+<dt id="pggui.widgets.progress_bar.ProgressBar.update_render"><code class="name flex">
 <span>def <span class="ident">update_render</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Update Render of Checkbox</p>
+<div class="desc"><p>Update Render of ProgressBar</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning:&ensp;You must use this method after any change in Checkbox</p>
+<p class="admonition-title">Warning:&ensp;You must use this method after any change in ProgressBar</p>
 </div></div>
 <details class="source">
 <summary>
@@ -239,20 +201,18 @@ class Checkbox(Widget):
 </summary>
 <pre><code class="python">def update_render(self):
     &#34;&#34;&#34;
-        Update Render of Checkbox
+        Update Render of ProgressBar
 
-        .. warning:: You must use this method after any change in Checkbox
+        .. warning:: You must use this method after any change in ProgressBar
     &#34;&#34;&#34;
-    self.render_btn = pygame.Surface((20*self.scale, 20*self.scale))
-    self.render_btn.fill((50, 50, 50))
-    self.render_btn.fill((255, 255, 255), pygame.Rect(2*self.scale, 2*self.scale, 16*self.scale, 16*self.scale))
-    if self.checked:
-        self.render_btn.fill((0, 0, 0), pygame.Rect(3*self.scale, 3*self.scale, 14*self.scale, 14*self.scale))
-
-    render_label = self.font.render(self.text)
-    self.render = pygame.Surface((20*self.scale + 5 + render_label.get_width(), 20*self.scale), pygame.SRCALPHA, 32).convert_alpha()
-    self.render.blit(self.render_btn, (0, 0))
-    self.render.blit(render_label, (20*self.scale + 5, 10*self.scale - render_label.get_height() / 2))</code></pre>
+    self.render = pygame.Surface(self.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
+    self.render.fill((50, 50, 50))
+    white = pygame.Surface((self.size - 2).coords(), pygame.SRCALPHA, 32).convert_alpha()
+    white.fill((255, 255, 255))
+    self.render.blit(white, (1, 1))
+    bar = pygame.Surface((int((self.size.x - 4) * (self.value / 100)), self.size.y - 4), pygame.SRCALPHA, 32).convert_alpha()
+    bar.fill(self.color.get_rgba())
+    self.render.blit(bar, (2, 2))</code></pre>
 </details>
 </dd>
 </dl>
@@ -284,10 +244,10 @@ class Checkbox(Widget):
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="pggui.widgets.checkbox.Checkbox" href="#pggui.widgets.checkbox.Checkbox">Checkbox</a></code></h4>
+<h4><code><a title="pggui.widgets.progress_bar.ProgressBar" href="#pggui.widgets.progress_bar.ProgressBar">ProgressBar</a></code></h4>
 <ul class="">
-<li><code><a title="pggui.widgets.checkbox.Checkbox.display" href="#pggui.widgets.checkbox.Checkbox.display">display</a></code></li>
-<li><code><a title="pggui.widgets.checkbox.Checkbox.update_render" href="#pggui.widgets.checkbox.Checkbox.update_render">update_render</a></code></li>
+<li><code><a title="pggui.widgets.progress_bar.ProgressBar.display" href="#pggui.widgets.progress_bar.ProgressBar.display">display</a></code></li>
+<li><code><a title="pggui.widgets.progress_bar.ProgressBar.update_render" href="#pggui.widgets.progress_bar.ProgressBar.update_render">update_render</a></code></li>
 </ul>
 </li>
 </ul>
