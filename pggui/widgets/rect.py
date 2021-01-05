@@ -9,14 +9,14 @@ class Rect(Widget):
         """
             Create Rect Widget
 
-            :param position: Position of Rect
-            :param length: Length of Rect
-            :param width: Width of Rect
-            :param color: Color of Rect
-            :type position: Vec2
-            :type length: Vec2
-            :type width: int
-            :type color: Color
+            Parameters
+            ----------
+            position: Vec2
+                Position of Rect
+            size: Vec2
+                Size of Rect
+            color: Color
+                Color of Rect
         """
         super().__init__(position)
         self.size = size
@@ -26,7 +26,7 @@ class Rect(Widget):
         """
             Display Rect Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()))

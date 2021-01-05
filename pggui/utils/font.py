@@ -11,22 +11,24 @@ class Font:
         """
             Create Font
 
-            :param name: Name of font or name of file of font
-            :param size: Size of font
-            :param bold: True if font is in bold or False
-            :param italic: True if font is in italic or False
-            :param underline: True if font is in italic or False
-            :param color: Color of Font
-            :param background: Color of background of Font or None
-            :param antialias: True if font have antialias or False
-            :type name: str
-            :type size: int
-            :type bold: bool
-            :type italic: bool
-            :type underline: bool
-            :type color: Color
-            :type background: Color
-            :type antialias: bool
+            Parameters
+            ----------
+            name: str
+                Name of font or name of file of font
+            size: int
+                Size of font
+            bold: bool 
+                True if font is in bold or False
+            italic: bool
+                True if font is in italic or False
+            underline: bool
+                True if font is in italic or False
+            color: Color
+                Color of Font
+            background: Color or None
+                Color of background of Font or None
+            antialias: bool
+                True if font have antialias or False
         """
         self.name = name
         self.size = size
@@ -58,10 +60,15 @@ class Font:
         """
             Return the rendered size of font with a text
 
-            :param text: Text will be rendered
-            :type text: str
-            :return: Size of rendered text
-            :rtype: Vec2
+            Parameters
+            ----------
+            text: str
+                Text will be rendered
+
+            Returns
+            -------
+            Vec2
+                Size of rendered text
         """
         size = self.transformed_font.size(text)
         return Vec2(size[0], size[1])
@@ -70,9 +77,16 @@ class Font:
         """
             Make a render of a text
 
-            :param text: Text to be rendered
-            :type text: str
-            :return: Final render
+            Parameters
+            ----------
+            text: str
+                Text will be rendered
+
+            Returns
+            -------
+            Final render
+
+            .. note:: You may not use this function.
         """
         if self.background:
             return self.transformed_font.render(text, self.antialias, self.color.get_rgba(), self.background.get_rgba())

@@ -12,18 +12,20 @@ class Window:
         """
             Create Window
 
-            :param size: Size of Window
-            :param color: Color of background of Window
-            :param title: Title of Window
-            :param fps: Max FPS of Window (None if you don't want limit)
-            :param centered: True if you want centered window, else False
-            :param debug: True if you want some debug infos, else False
-            :type size: Vec2
-            :type color: Color
-            :type title: str
-            :type fps: int
-            :type centered: bool
-            :type debug: bool
+            Parameters
+            ----------
+            size: int
+                Size of Window
+            color: Color
+                Color of background of Window
+            title: str
+                Title of Window
+            fps: int or None
+                Max FPS of Window (None if you don't want limit)
+            centered: bool
+                True if you want centered window, else False
+            debug: bool
+                True if you want some debug infos, else False
         """
 
         self.fps = fps
@@ -45,14 +47,26 @@ class Window:
         self.widgets = []
 
     def set_key_callback(self, key, callback):
+        """
+            Set Callback called after pressing key
+
+            Parameters
+            ----------
+            key: Key
+                Key will be pressed
+            callback: Function or None
+                Function will be called (or None to delete callback)
+        """
         self.keys_callback[key.value] = callback
 
     def add_widget(self, widget):
         """
             Add Widget to Window
 
-            :param widget: Widget to be added
-            :type widget: Widget
+            Parameters
+            ----------
+            widget: Widget
+                Widget to be added
         """
         if widget.parent is None:
             self.widgets.append(widget)
@@ -98,8 +112,10 @@ class Window:
         """
             Process pygame event
 
-            :param evt: PyGame Event to be processed
-            :type evt: Event
+            Parameters
+            ----------
+            evt: Event
+                PyGame Event to be processed
 
             .. note:: You may not use this method. Window make it for you.
         """

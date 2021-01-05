@@ -8,18 +8,20 @@ class Image(Widget):
         """
             Create Image Widget
 
-            :param position: Position of Image
-            :param sprite: Sprite of Image
-            :param size: Size of Image (or None)
-            :param rotation: Rotation of Image
-            :param flipx: True if Image is flip on X or False
-            :param flipy: True if Image is flip on Y or False
-            :type position: Vec2
-            :type sprite: str
-            :type size: Vec2
-            :type rotation: int
-            :type flipx: bool
-            :type flipy: bool
+            Parameters
+            ----------
+            position: Vec2
+                Position of Image
+            sprite: str
+                Path of sprite of Image
+            size: Vec2 or None
+                Size of Image. Set to None to use original size
+            rotation: int
+                Rotation of Image (in degrees)
+            flipx: bool
+                True if Image is flip on X or False
+            flipy: bool
+                True if Image is flip on Y or False
         """
         super().__init__(position)
         self.sprite = sprite
@@ -35,7 +37,7 @@ class Image(Widget):
         """
             Update Render of Image
 
-            .. note:: You must use this method after any change in Image
+            .. warning:: You must use this method after any change in Image
         """
         self.render = pygame.image.load(self.sprite).convert()
         if self.size is not None:
@@ -49,7 +51,7 @@ class Image(Widget):
         """
             Display Image Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             screen.blit(self.render, self.position.coords())

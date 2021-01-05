@@ -9,16 +9,18 @@ class Checkbox(Widget):
         """
             Create Checkbox Widget
 
-            :param position: Position of Checkbox
-            :param text: Text of Checkbox
-            :param font: Font of Checkbox
-            :param checked: True if Checkbox is checked or False
-            :param scale: Scale of Checkbox
-            :type position: Vec2
-            :type text: str
-            :type font: Font
-            :type checked: bool
-            :type scale: float
+            Parameters
+            ----------
+            position: Vec2
+                Position of Checkbox
+            text: str
+                Text of Checkbox
+            font: Font
+                Font of Checkbox
+            checked: bool
+                True if Checkbox is checked or False
+            scale: int or float
+                Scale of Checkbox
         """
         super().__init__(position)
         self.text = text
@@ -34,7 +36,7 @@ class Checkbox(Widget):
         """
             Update Render of Checkbox
 
-            .. note:: You must use this method after any change in Checkbox
+            .. warning:: You must use this method after any change in Checkbox
         """
         self.render_btn = pygame.Surface((20*self.scale, 20*self.scale))
         self.render_btn.fill((50, 50, 50))
@@ -51,7 +53,7 @@ class Checkbox(Widget):
         """
             Display Checkbox Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             screen.blit(self.render, self.position.coords())
@@ -60,7 +62,7 @@ class Checkbox(Widget):
         """
             Manage Pygame Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             if evt.type == pygame.MOUSEBUTTONDOWN and evt.button == pygame.BUTTON_LEFT:

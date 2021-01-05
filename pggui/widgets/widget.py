@@ -1,12 +1,14 @@
 from pggui.utils import Vec2
 
 class Widget:
-    def __init__(self, position = Vec2.zero()):
+    def __init__(self, position):
         """
             Create empty Widget
 
-            :param position: Position of Widget
-            :type position: Vec2
+            Parameters
+            ----------
+            position: Vec2
+                Position of Widget
 
             .. note:: You should not use this class without inheritance
         """
@@ -18,8 +20,10 @@ class Widget:
         """
             Get Absolute Position
 
-            :return: Absolute Position
-            :rtype: Vec2
+            Returns
+            -------
+            Vec2
+                Absolute Position
         """
         if self.parent is None:
             return self.position
@@ -30,7 +34,7 @@ class Widget:
         """
             Update Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         pass
 
@@ -38,7 +42,7 @@ class Widget:
         """
             Manage Pygame Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         pass
     
@@ -46,6 +50,6 @@ class Widget:
         """
             Display Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         pass

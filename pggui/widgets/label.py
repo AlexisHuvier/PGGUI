@@ -9,16 +9,18 @@ class Label(Widget):
         """
             Create Label Widget
 
-            :param position: Position of Label
-            :param text: Text of Label
-            :param font: Font of Label
-            :param background: Background of Label (or None)
-            :param spacing_line: Space between two line
-            :type position: Vec2
-            :type text: str
-            :type font: Font
-            :type background: Color
-            :type spacing_line: int
+            Parameters
+            ----------
+            position: Vec2
+                Position of Label
+            text: str
+                Text of Label
+            font: Font
+                Font of Label
+            background: Color or None
+                Background of Label. Set to None to transparent background
+            spacing_line: int
+                Space between two lines
         """
         super().__init__(position)
         self.text = text
@@ -31,7 +33,7 @@ class Label(Widget):
         """
             Update Render of Label
 
-            .. note:: You must use this method after changing Font or Text of Label
+            .. warning:: You must use this method after changing Font or Text of Label
         """
         if "\n" in self.text:
             self.renders = [self.font.render(i) for i in self.text.split("\n")]
@@ -44,7 +46,7 @@ class Label(Widget):
         """
             Display Label Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed and len(self.text):
             if self.single:

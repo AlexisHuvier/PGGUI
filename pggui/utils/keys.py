@@ -1,10 +1,16 @@
 import pygame.locals as pgconst
 
 class Key:
+    """
+        PGGUI Wrapper of Pygame Keys
+    """
     def __init__(self, value):
         self.value = value
 
 class Keys:
+    """
+        List of PGGUI Keys
+    """
     K_BACKSPACE = Key(pgconst.K_BACKSPACE)
     K_TAB = Key(pgconst.K_TAB)
     K_CLEAR = Key(pgconst.K_CLEAR)

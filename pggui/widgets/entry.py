@@ -10,16 +10,18 @@ class Entry(Widget):
         """
             Create Entry Wiget
 
-            :param position: Position of Entry
-            :param width: Width of Entry
-            :param font: Font of Label of Entry
-            :param accepted: String of accepted character
-            :param image: Background image of Entry (or None)
-            :type position: Vec2
-            :type width: int
-            :type font: Font
-            :type accepted: str
-            :type image: str
+            Parameters
+            ----------
+            position: Vec2
+                Position of Entry
+            width: int
+                Width of Entry
+            font: Font
+                Font of Label of Entry
+            accepted: sstr
+                String of accepted characters
+            image: str or None
+                Background image of Entry (or None)
         """
         super().__init__(position)
 
@@ -37,7 +39,7 @@ class Entry(Widget):
         """
             Update Render of Entry
 
-            .. note:: You must use this method after any change in Entry
+            .. warning:: You must use this method after any change in Entry
         """
         if self.label.text != self.text:
             self.label.text = self.text
@@ -59,7 +61,7 @@ class Entry(Widget):
         """
             Manage Pygame Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             if evt.type == pygame.KEYDOWN and self.focus:
@@ -79,7 +81,7 @@ class Entry(Widget):
         """
             Manage Pygame KeyPress Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         mod -= 4096
         if key == pygame.K_BACKSPACE:
@@ -91,7 +93,7 @@ class Entry(Widget):
         """
             Display Entry Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             render_rect = self.render.get_rect()

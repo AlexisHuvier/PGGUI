@@ -17,10 +17,15 @@ class Color:
         """
             Create darker color object with a force multiplier
 
-            :param force: Force multiplier
-            :type force: int
-            :return: Color object
-            :rtype: Color
+            Parameters
+            ----------
+            force: int
+                Force multiplier
+            
+            Returns
+            -------
+            Color
+                Color object
         """
         nb = clamp(force, 1)
         rgb = (clamp(x - 10*nb, 0, 255) for x in self.get_rgb())
@@ -30,10 +35,15 @@ class Color:
         """
             Create lighter color object with a force multiplier
 
-            :param force: Force multiplier
-            :type force: int
-            :return: Color object
-            :rtype: Color
+            Parameters
+            ----------
+            force: int
+                Force multiplier
+            
+            Returns
+            -------
+            Color
+                Color object
         """
         nb = clamp(force, 1)
         rgb = (clamp(x + 10*nb, 0, 255) for x in self.get_rgb())
@@ -43,8 +53,10 @@ class Color:
         """
             Return tuple with rgb values
 
-            :return: Tuple with rgb values
-            :rtype: Tuple[int, int, int]
+            Returns
+            -------
+            Tuple(int, int, int)
+                Tuple with rgb values
         """
         return self.r, self.g, self.b
 
@@ -52,8 +64,10 @@ class Color:
         """
             Return tuple with rgba values
 
-            :return: Tuple with rgba values
-            :rtype: Tuple[int, int, int, int]
+            Returns
+            -------
+            Tuple(int, int, int, int)
+                Tuple with rgba values
         """
         return self.r, self.g, self.b, self.a
 
@@ -61,8 +75,10 @@ class Color:
         """
             Return html color format for Color object
 
-            :return: html color
-            :rtype: str
+            Returns
+            -------
+            str
+                html color
         """
         return ("#"+hex(self.r)[2:]+hex(self.g)[2:]+hex(self.b)[2:]+hex(self.a)[2:]).upper()
 
@@ -70,8 +86,10 @@ class Color:
         """
             Represents Color Object
 
-            :return: RGBA Values convert in string
-            :rtype: str
+            Returns
+            -------
+            str
+                RGBA Values convert in string
         """
         return str(self.get_rgba())
 
@@ -80,14 +98,19 @@ class Color:
         """
             Create Color object from rgb values
 
-            :param r: Red Value
-            :param g: Green Value
-            :param b: Blue Value
-            :type r: int
-            :type g: int
-            :type b: int
-            :return: Color Object
-            :rtype: Color
+            Parameters
+            ----------
+            r: int
+                Red Value
+            b: int
+                Blue Value
+            g: int
+                Green Value
+
+            Returns
+            -------
+            Color
+                Color Object
         """
         color = Color()
         color.r = r
@@ -100,16 +123,21 @@ class Color:
         """
             Create Color object from rgba values
 
-            :param r: Red Value
-            :param g: Green Value
-            :param b: Blue Value
-            :param a: Alpha Value
-            :type r: int
-            :type g: int
-            :type b: int
-            :type a: int
-            :return: Color Object
-            :rtype: Color
+            Parameters
+            ----------
+            r: int
+                Red Value
+            b: int
+                Blue Value
+            g: int
+                Green Value
+            a: int
+                Alpha Value
+
+            Returns
+            -------
+            Color
+                Color Object
         """
         color = Color.from_rgb(r, g, b)
         color.a = a
@@ -120,10 +148,15 @@ class Color:
         """
             Create Color object from anthor color object
 
-            :param color: Basic Color
-            :type color: Color
-            :return: Color Object
-            :rtype: Color
+            Parameters
+            ----------
+            color: Color
+                Basic Color
+
+            Returns
+            -------
+            Color
+                Color Object
         """
         return Color.from_rgba(*color.get_rgba())
 
@@ -132,10 +165,15 @@ class Color:
         """
             Create Color object from html color format
 
-            :param html: HTML Color format
-            :type html: str
-            :return: Color Object
-            :rtype: Color
+            Parameters
+            ----------
+            html: str
+                HTML formatted Color
+
+            Returns
+            -------
+            Color
+                Color Object
         """
         if len(html) == 7 or len(html) == 9:
             if len(html) == 7:
@@ -149,10 +187,17 @@ class Color:
         """
             Create Color object from name
             
-            :param name: Name
-            :type name: str
-            :return: Color Object
-            :rtype: Color
+            Parameters
+            ----------
+            name: str
+                Name of Color
+
+            Returns
+            -------
+            Color
+                Color Object
+                
+            .. note:: List of colors known : WHITE, BLACK, GRAY, RED, GREEN, BLUE, FUCHSIA, YELLOW, CYAN, LIME, BROWN, NAVY_BLUE, OLIVE, PURPLE, TEAL, SILVER, ORANGE
         """
         colors = {
             "WHITE": (255, 255, 255),
@@ -173,4 +218,4 @@ class Color:
             "SILVER": (192, 192, 192),
             "ORANGE": (255, 128, 0)
         }
-        return Color.from_rgb(*colors[name])
+        return Color.from_rgb(*colors[name.upper()])

@@ -10,16 +10,18 @@ class TextEdit(Widget):
         """
             Create TextEdit Wiget
 
-            :param position: Position of TextEdit
-            :param size: Size of TextEdit
-            :param font: Font of Label of TextEdit
-            :param accepted: String of accepted character
-            :param image: Background image of TextEdit (or None)
-            :type position: Vec2
-            :type size: Vec2
-            :type font: Font
-            :type accepted: str
-            :type image: str
+            Parameters
+            ----------
+            position: Vec2
+                Position of TextEdit
+            size: Vec2
+                Size of TextEdit
+            font: Font
+                Font of Label of TextEdit
+            accepted: str
+                String of accepted characters
+            image: str or None
+                Path of Background image of TextEdit or None
         """
         super().__init__(position)
 
@@ -37,7 +39,7 @@ class TextEdit(Widget):
         """
             Update Render of TextEdit
 
-            .. note:: You must use this method after any change in TextEdit
+            .. warning:: You must use this method after any change in TextEdit
         """
         if self.label.text != self.text:
             self.label.text = self.text
@@ -57,7 +59,7 @@ class TextEdit(Widget):
         """
             Manage Pygame Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             if evt.type == pygame.KEYDOWN and self.focus:
@@ -77,7 +79,7 @@ class TextEdit(Widget):
         """
             Manage Pygame KeyPress Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         mod -= 4096
         if key == pygame.K_BACKSPACE:
@@ -92,7 +94,7 @@ class TextEdit(Widget):
         """
             Display TextEdit Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             render_rect = self.render.get_rect()

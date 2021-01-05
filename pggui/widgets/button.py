@@ -9,18 +9,20 @@ class Button(Widget):
         """
             Create Button Widget
 
-            :param position: Position of Button
-            :param text: Text of Button
-            :param command: Click callback of Button
-            :param font: Font of Button
-            :param size: Size of Button
-            :param background: Background of Button
-            :type position: Vec2
-            :type text: str
-            :type command: Function
-            :type font: Font
-            :type size: Vec2
-            :type background: Color or str
+            Parameters
+            ----------
+            position: Vec2
+                Position of Button
+            text: str
+                Text of Button
+            command: Function or None
+                Click callback of Button
+            font: Font
+                Font of Button
+            size: Vec2
+                Size of Button
+            background: Color or str
+                Background of Button. May be a Color or a path to a image
         """
         super().__init__(position)
         self.text = text
@@ -35,7 +37,7 @@ class Button(Widget):
         """
             Update Render of Button
 
-            .. note:: You must use this method after any change in Button
+            .. warning:: You must use this method after any change in Button
         """
         if isinstance(self.background, Color):
             self.render = pygame.Surface(self.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
@@ -53,7 +55,7 @@ class Button(Widget):
         """
             Display Button Widget
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed:
             screen.blit(self.render, self.position.coords())
@@ -62,7 +64,7 @@ class Button(Widget):
         """
             Manage Pygame Event
 
-            .. note:: Don't use this function manually.
+            .. warning:: Don't use this function manually.
         """
         if self.displayed and self.command is not None:
             if evt.type == pygame.MOUSEBUTTONDOWN and evt.button == pygame.BUTTON_LEFT:

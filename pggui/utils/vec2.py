@@ -5,9 +5,13 @@ class Vec2:
     def __init__(self, x, y):
         """
             Create Vec2 Object
-            
-            :param x: X Coord
-            :param y: Y Coord
+
+            Parameters
+            ----------
+            x: 
+                X Coord of Vector
+            y: 
+                Y Coord of Vector
         """
         self.x = x
         self.y = y
@@ -16,7 +20,10 @@ class Vec2:
         """
             Return a tuple of coords
 
-            :return: Tuple with X and Y Coords
+            Returns
+            -------
+            Tuple
+                Tuple with X and Y Coords
         """
         return self.x, self.y
 
@@ -24,8 +31,12 @@ class Vec2:
         """
             Define X and Y Coords
 
-            :param x: X Coord
-            :param y: Y Coord
+            Parameters
+            ----------
+            x: 
+                X Coord of Vector
+            y: 
+                Y Coord of Vector
         """
         self.x = x
         self.y = y
@@ -34,8 +45,10 @@ class Vec2:
         """
             Return the normalized Vector created with the vector
 
-            :return: Normalized Vector
-            :rtype: Vec2
+            Returns
+            -------
+            Vec2
+                Normalized Vector
         """
         if len(self) == 0:
             return Vec2.zero()
@@ -93,8 +106,10 @@ class Vec2:
         """
             Return the Vector Zero
 
-            :return: Vector Zero
-            :rtype: Vec2
+            Returns
+            -------
+            Vec2
+                Vector Zero
         """
         return Vec2(0, 0)
     
@@ -103,7 +118,9 @@ class Vec2:
         """
             Return the Vector One
 
-            :return: Vector One
-            :rtype: Vec2
+            Returns
+            -------
+            Vec2
+                Vector One
         """
         return Vec2(1, 1)
