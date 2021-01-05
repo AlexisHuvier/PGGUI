@@ -4,3 +4,4 @@
 *.egg-info
 /dist/*
 /build/*
+generate_doc.py
