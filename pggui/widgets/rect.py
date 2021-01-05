@@ -5,7 +5,7 @@ from pggui.utils import Color, Vec2
 
 
 class Rect(Widget):
-    def __init__(self, position, length=Vec2.zero(), color=Color.from_name("BLACK")):
+    def __init__(self, position, size=Vec2.zero(), color=Color.from_name("BLACK")):
         """
             Create Rect Widget
 
@@ -19,7 +19,7 @@ class Rect(Widget):
             :type color: Color
         """
         super().__init__(position)
-        self.length = length
+        self.size = size
         self.color = color
     
     def display(self, screen):
@@ -29,4 +29,4 @@ class Rect(Widget):
             .. note:: Don't use this function manually.
         """
         if self.displayed:
-            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.length.coords()))
+            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()))
