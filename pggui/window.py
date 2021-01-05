@@ -40,8 +40,12 @@ class Window:
         self.clock = pygame.time.Clock()
         self.is_running = False
         self.debug_font = Font(bold=True, color=Color.from_name("ORANGE"))
+        self.keys_callback = {}
 
         self.widgets = []
+
+    def set_key_callback(self, key, callback):
+        self.keys_callback[key.value] = callback
 
     def add_widget(self, widget):
         """
@@ -101,6 +105,9 @@ class Window:
         """
         if evt.type == pgconst.QUIT:
             self.stop()
-        else:
-            for i in self.widgets:
-                i.event(evt)
+        
+        if evt.type == pgconst.KEYUP and evt.key in self.keys_callback:
+            self.keys_callback[evt.key]()
+
+        for i in self.widgets:
+            i.event(evt)
