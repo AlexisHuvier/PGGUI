@@ -5,4 +5,5 @@ from pggui.widgets.label import Label
 from pggui.widgets.button import Button
 from pggui.widgets.entry import Entry
 from pggui.widgets.text_edit import TextEdit
+from pggui.widgets.checkbox import Checkbox
 from pggui.widgets.widget import Widget
