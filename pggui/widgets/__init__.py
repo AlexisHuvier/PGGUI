@@ -4,4 +4,5 @@ from pggui.widgets.image import Image
 from pggui.widgets.label import Label
 from pggui.widgets.button import Button
 from pggui.widgets.entry import Entry
+from pggui.widgets.text_edit import TextEdit
 from pggui.widgets.widget import Widget
