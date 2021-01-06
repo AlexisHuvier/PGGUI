@@ -9,4 +9,5 @@ from pggui.widgets.checkbox import Checkbox
 from pggui.widgets.selector import Selector
 from pggui.widgets.progress_bar import ProgressBar
 from pggui.widgets.polygon import Polygon
+from pggui.widgets.ellipse import Ellipse
 from pggui.widgets.widget import Widget
