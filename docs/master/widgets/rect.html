@@ -33,7 +33,7 @@ from pggui.utils import Color, Vec2
 
 
 class Rect(Widget):
-    def __init__(self, position, size=Vec2.zero(), color=Color.from_name(&#34;BLACK&#34;)):
+    def __init__(self, position, size=Vec2.zero(), color=Color.from_name(&#34;BLACK&#34;), width=0):
         &#34;&#34;&#34;
             Create Rect Widget
 
@@ -45,10 +45,13 @@ class Rect(Widget):
                 Size of Rect
             color: Color
                 Color of Rect
+            width: int
+                Width of Rect (0 fill Rect)
         &#34;&#34;&#34;
         super().__init__(position)
         self.size = size
         self.color = color
+        self.width = width
     
     def display(self, screen):
         &#34;&#34;&#34;
@@ -57,7 +60,7 @@ class Rect(Widget):
             .. warning:: Don&#39;t use this function manually.
         &#34;&#34;&#34;
         if self.displayed:
-            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()))</code></pre>
+            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()), self.width)</code></pre>
 </details>
 </section>
 <section>
@@ -71,7 +74,7 @@ class Rect(Widget):
 <dl>
 <dt id="pggui.widgets.rect.Rect"><code class="flex name class">
 <span>class <span class="ident">Rect</span></span>
-<span>(</span><span>position, size=Vec2(0, 0), color=(0, 0, 0, 255))</span>
+<span>(</span><span>position, size=Vec2(0, 0), color=(0, 0, 0, 255), width=0)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create Rect Widget</p>
@@ -83,13 +86,15 @@ class Rect(Widget):
 <dd>Size of Rect</dd>
 <dt><strong><code>color</code></strong> :&ensp;<code>Color</code></dt>
 <dd>Color of Rect</dd>
+<dt><strong><code>width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Width of Rect (0 fill Rect)</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Rect(Widget):
-    def __init__(self, position, size=Vec2.zero(), color=Color.from_name(&#34;BLACK&#34;)):
+    def __init__(self, position, size=Vec2.zero(), color=Color.from_name(&#34;BLACK&#34;), width=0):
         &#34;&#34;&#34;
             Create Rect Widget
 
@@ -101,10 +106,13 @@ class Rect(Widget):
                 Size of Rect
             color: Color
                 Color of Rect
+            width: int
+                Width of Rect (0 fill Rect)
         &#34;&#34;&#34;
         super().__init__(position)
         self.size = size
         self.color = color
+        self.width = width
     
     def display(self, screen):
         &#34;&#34;&#34;
@@ -113,7 +121,7 @@ class Rect(Widget):
             .. warning:: Don&#39;t use this function manually.
         &#34;&#34;&#34;
         if self.displayed:
-            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()))</code></pre>
+            pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()), self.width)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -140,7 +148,7 @@ class Rect(Widget):
         .. warning:: Don&#39;t use this function manually.
     &#34;&#34;&#34;
     if self.displayed:
-        pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()))</code></pre>
+        pygame.draw.rect(screen, self.color.get_rgba(), pygame.Rect(*self.position.coords(), *self.size.coords()), self.width)</code></pre>
 </details>
 </dd>
 </dl>
