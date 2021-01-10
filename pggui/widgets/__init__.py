@@ -11,4 +11,5 @@ from pggui.widgets.progress_bar import ProgressBar
 from pggui.widgets.circle import Circle
 from pggui.widgets.polygon import Polygon
 from pggui.widgets.ellipse import Ellipse
+from pggui.widgets.frame import Frame
 from pggui.widgets.widget import Widget
